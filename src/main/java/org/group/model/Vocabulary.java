@@ -2,16 +2,14 @@ package org.group.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.group.model.enums.TuLoai;
 import org.hibernate.annotations.Proxy;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -31,18 +29,28 @@ public class Vocabulary {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	@Column(unique = true)
 	private String english;
 	private String hashTag;
-	@Enumerated(EnumType.STRING)
-	private TuLoai tuLoai;
+	private String tuLoai;
 	private String phienAm;
 	private String vietnamses;
 	private String goiNho;
-	private String imgURL;
-	private String voiceURL;
+	private String imgPath;
+	private String voicePath;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
-	private Date addDate;
+	private Date modifyDate;
+
+	public Vocabulary(String english, String hashTag, String tuLoai, String phienAm, String vietnamses, String goiNho) {
+		super();
+		this.english = english;
+		this.hashTag = hashTag;
+		this.tuLoai = tuLoai;
+		this.phienAm = phienAm;
+		this.vietnamses = vietnamses;
+		this.goiNho = goiNho;
+	}
 
 }
