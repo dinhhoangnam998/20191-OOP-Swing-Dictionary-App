@@ -31,7 +31,7 @@ public class Vocabulary {
 
 	@Column(unique = true)
 	private String english;
-	private String hashTag;
+	private String hashtag;
 	private String tuLoai;
 	private String phienAm;
 	private String vietnamses;
@@ -46,7 +46,7 @@ public class Vocabulary {
 	public Vocabulary(String english, String hashTag, String tuLoai, String phienAm, String vietnamses, String goiNho) {
 		super();
 		this.english = english;
-		this.hashTag = hashTag;
+		this.hashtag = hashTag;
 		this.tuLoai = tuLoai;
 		this.phienAm = phienAm;
 		this.vietnamses = vietnamses;

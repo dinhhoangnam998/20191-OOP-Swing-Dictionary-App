@@ -1,11 +1,13 @@
 package org.group.gui;
 
 import java.awt.CardLayout;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
@@ -14,9 +16,13 @@ import javax.swing.JTabbedPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import org.group.gui.event.listener.AddVocabListener;
+import org.group.gui.event.listener.SearchByHashtagListener;
+import org.group.gui.event.listener.SearchByWordListener;
 import org.group.gui.event.object.AddVocabEvent;
+import org.group.gui.event.object.SearchByHashtagEvent;
+import org.group.gui.event.object.SearchByWordEvent;
+import org.group.gui.findword.FindWord;
 import org.group.gui.vocabform.AddForm;
-import org.group.gui.vocabform.EditForm;
 import org.group.model.Vocabulary;
 import org.group.service.VocabularyS;
 import org.group.utils.ConstanceUtil;
@@ -31,6 +37,10 @@ public class MainFrame {
 
 	@Autowired
 	private VocabularyS vocabS;
+
+	protected FindWord findWord;
+
+	protected AddForm addForm;
 
 	public MainFrame() {
 		initialize();
@@ -63,18 +73,17 @@ public class MainFrame {
 								.addComponent(navbar, GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE))));
 		layeredPane.setLayout(new CardLayout(0, 0));
 
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		layeredPane.add(tabbedPane, "name_44069459764000");
+		JTabbedPane layer1 = new JTabbedPane(JTabbedPane.TOP);
+		layeredPane.add(layer1, "name_44069459764000");
 
-		AddForm addForm = new AddForm();
+		addForm = new AddForm();
 		addForm.setAddVocabHandler(new AddVocabHandler());
-		tabbedPane.addTab("Add Vocab", null, addForm, null);
+		layer1.addTab("Add Vocab", null, addForm, null);
 
-		EditForm editForm = new EditForm();
-		tabbedPane.addTab("", null, editForm, null);
-
-		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
-		layeredPane.add(tabbedPane_1, "name_44073610947800");
+		findWord = new FindWord();
+		findWord.setSbwHandler(new SearchByWordHandler());
+		findWord.setSbhHandler(new SearchByHashtagHandler());
+		layer1.addTab("Search", null, findWord, null);
 		frame.getContentPane().setLayout(groupLayout);
 	}
 
@@ -92,10 +101,34 @@ public class MainFrame {
 			}
 			try {
 				vocabS.vocabR.save(v);
-				JOptionPane.showMessageDialog(frame, "Add Vocab success!");
+				Icon icon = new ImageIcon("G:\\Resource\\icon\\icons8_ok_48px.png");
+				JOptionPane.showMessageDialog(frame, "Add vocab success.", "Success", JOptionPane.INFORMATION_MESSAGE,
+						icon);
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(frame, "An error has occured! Add vocab fail");
+				Icon icon = new ImageIcon("G:\\Resource\\icon\\icons8_cancel_48px.png");
+				JOptionPane.showMessageDialog(frame, v.getEnglish() + " already exist!", "Add vocab fail",
+						JOptionPane.ERROR_MESSAGE, icon);
 			}
+		}
+
+	}
+
+	class SearchByWordHandler implements SearchByWordListener {
+		@Override
+		public void searchByWordOccur(SearchByWordEvent sbwe) {
+			String keyword = sbwe.getKeyword();
+			List<Vocabulary> vocabs = vocabS.vocabR.findByEnglishContaining(keyword);
+			findWord.displayData(vocabs);
+		}
+
+	}
+
+	class SearchByHashtagHandler implements SearchByHashtagListener {
+		@Override
+		public void searchByHashtagOccur(SearchByHashtagEvent sbhe) {
+			String keyword = sbhe.getKeyword();
+			List<Vocabulary> vocabs = vocabS.vocabR.findByHashtagContaining(keyword);
+			findWord.displayData(vocabs);
 		}
 
 	}

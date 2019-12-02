@@ -19,11 +19,16 @@ import org.group.model.Vocabulary;
 
 public class AbstractForm extends JPanel {
 	protected JTextField englishTF;
-	protected JTextField hastagTF;
+	protected JTextField hashtagTF;
 	protected JTextField phienAmTF;
 	protected JTextArea vietNamTA;
 	protected JTextArea goiNhoTA;
 	protected ButtonGroup tuLoaiGroup;
+	protected JRadioButton rdbtnNoun;
+	protected JRadioButton rdbtnVerb;
+	protected JRadioButton rdbtnAdj;
+	protected JRadioButton rdbtnAdv;
+	protected JRadioButton rdbtnOther;
 
 	public AbstractForm() {
 		setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -61,15 +66,15 @@ public class AbstractForm extends JPanel {
 		gbc_lblHashtag.gridy = 1;
 		add(lblHashtag, gbc_lblHashtag);
 
-		hastagTF = new JTextField();
-		hastagTF.setText("#lala");
+		hashtagTF = new JTextField();
+		hashtagTF.setText("#lala");
 		GridBagConstraints gbc_hastagTF = new GridBagConstraints();
 		gbc_hastagTF.insets = new Insets(0, 0, 5, 0);
 		gbc_hastagTF.fill = GridBagConstraints.HORIZONTAL;
 		gbc_hastagTF.gridx = 1;
 		gbc_hastagTF.gridy = 1;
-		add(hastagTF, gbc_hastagTF);
-		hastagTF.setColumns(10);
+		add(hashtagTF, gbc_hastagTF);
+		hashtagTF.setColumns(10);
 
 		JLabel lblTuLoai = new JLabel("Tu loai");
 		GridBagConstraints gbc_lblTuLoai = new GridBagConstraints();
@@ -90,34 +95,33 @@ public class AbstractForm extends JPanel {
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		tuLoaiGroup = new ButtonGroup();
-		JRadioButton rdbtnNoun = new JRadioButton("noun");
+		rdbtnNoun = new JRadioButton("noun");
 		rdbtnNoun.setHorizontalAlignment(SwingConstants.LEFT);
 		rdbtnNoun.setActionCommand("noun");
+		tuLoaiGroup.add(rdbtnNoun);
 		panel.add(rdbtnNoun);
 
-		JRadioButton rdbtnVerb = new JRadioButton("verb");
+		rdbtnVerb = new JRadioButton("verb");
 		rdbtnNoun.setActionCommand("verb");
+		tuLoaiGroup.add(rdbtnVerb);
 		panel.add(rdbtnVerb);
 
-		JRadioButton rdbtnAdj = new JRadioButton("adj");
+		rdbtnAdj = new JRadioButton("adj");
 		rdbtnNoun.setActionCommand("adj");
+		tuLoaiGroup.add(rdbtnAdj);
 		panel.add(rdbtnAdj);
 
-		JRadioButton rdbtnAdv = new JRadioButton("adv");
+		rdbtnAdv = new JRadioButton("adv");
 		rdbtnNoun.setActionCommand("adv");
+		tuLoaiGroup.add(rdbtnAdv);
 		panel.add(rdbtnAdv);
 
-		JRadioButton rdbtnOther = new JRadioButton("other");
+		rdbtnOther = new JRadioButton("other");
 		rdbtnNoun.setActionCommand("other");
+		tuLoaiGroup.add(rdbtnOther);
 		rdbtnOther.setSelected(true);
 		rdbtnOther.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel.add(rdbtnOther);
-
-		tuLoaiGroup.add(rdbtnNoun);
-		tuLoaiGroup.add(rdbtnVerb);
-		tuLoaiGroup.add(rdbtnAdj);
-		tuLoaiGroup.add(rdbtnAdv);
-		tuLoaiGroup.add(rdbtnOther);
 
 		JLabel lblPhienAm = new JLabel("Phien am");
 		GridBagConstraints gbc_lblPhienAm = new GridBagConstraints();
@@ -178,14 +182,35 @@ public class AbstractForm extends JPanel {
 
 	protected Vocabulary collectInfo() {
 		String english = englishTF.getText();
-		String hashtag = hastagTF.getText();
-		String tuloai = tuLoaiGroup.getSelection().getActionCommand();
-		System.out.println(tuloai);
+		String hashtag = hashtagTF.getText();
 		String phienAm = phienAmTF.getText();
+		String tuloai = getTuLoai();
 		String vn = vietNamTA.getText();
 		String goiNho = goiNhoTA.getText();
 		Vocabulary v = new Vocabulary(english, hashtag, tuloai, phienAm, vn, goiNho);
 		return v;
+	}
+
+	protected String getTuLoai() {
+		if (rdbtnNoun.isSelected()) {
+			return "noun";
+		} else if (rdbtnVerb.isSelected()) {
+			return "verb";
+		} else if (rdbtnAdj.isSelected()) {
+			return "adj";
+		} else if (rdbtnAdv.isSelected()) {
+			return "adv";
+		} else {
+			return "other";
+		}
+	}
+
+	protected void setData(Vocabulary v) {
+		englishTF.setText(v.getEnglish());
+		hashtagTF.setText(v.getHashtag());
+		phienAmTF.setText(v.getPhienAm());
+		vietNamTA.setText(v.getVietnamses());
+		goiNhoTA.setText(v.getGoiNho());
 	}
 
 }
