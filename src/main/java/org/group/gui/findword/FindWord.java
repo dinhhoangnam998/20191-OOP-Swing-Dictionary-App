@@ -29,6 +29,7 @@ public class FindWord extends JPanel {
 		setLayout(null);
 
 		rdbtnWord = new JRadioButton("Word");
+		rdbtnWord.setSelected(true);
 		rdbtnWord.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				wordTF.setEnabled(true);
@@ -55,6 +56,7 @@ public class FindWord extends JPanel {
 		btnGroup.add(rdbtnWord);
 
 		wordTF = new JTextField();
+		
 		wordTF.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String keyword = wordTF.getText();
@@ -79,7 +81,8 @@ public class FindWord extends JPanel {
 		table = new ResultTable();
 		table.setBounds(8, 91, 520, 485);
 		add(table);
-
+		wordTF.requestFocus();
+		hashtagTF.setEnabled(false);
 	}
 
 	public void setSbhHandler(SearchByHashtagListener sbhHandler) {

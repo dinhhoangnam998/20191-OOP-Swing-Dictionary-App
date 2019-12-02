@@ -78,12 +78,14 @@ public class MainFrame {
 
 		addForm = new AddForm();
 		addForm.setAddVocabHandler(new AddVocabHandler());
-		layer1.addTab("Add Vocab", null, addForm, null);
+		layer1.addTab("Thêm từ mới", null, addForm, null);
+		layer1.setMnemonicAt(0, 84);
 
 		findWord = new FindWord();
 		findWord.setSbwHandler(new SearchByWordHandler());
 		findWord.setSbhHandler(new SearchByHashtagHandler());
-		layer1.addTab("Search", null, findWord, null);
+		layer1.addTab("Tìm kiếm", null, findWord, null);
+		layer1.setMnemonicAt(1, 75);
 		frame.getContentPane().setLayout(groupLayout);
 	}
 

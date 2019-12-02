@@ -26,7 +26,7 @@ public class CrudForm extends AbstractForm {
 		gridBagLayout.columnWeights = new double[] { 0.0, 1.0 };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0 };
 
-		JLabel lblFile = new JLabel("FIle");
+		JLabel lblFile = new JLabel("Chọn file");
 		GridBagConstraints gbc_lblFile = new GridBagConstraints();
 		gbc_lblFile.anchor = GridBagConstraints.WEST;
 		gbc_lblFile.insets = new Insets(0, 0, 0, 5);
@@ -47,7 +47,7 @@ public class CrudForm extends AbstractForm {
 		gbl_panel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
 
-		imgURLBtn = new JButton("Image");
+		imgURLBtn = new JButton("File hình ảnh");
 		imgURLBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				imgFile = FileChooserUtil.chooseFile(CrudForm.this, "png");
@@ -60,7 +60,7 @@ public class CrudForm extends AbstractForm {
 		gbc_imgURLBtn.gridy = 0;
 		panel.add(imgURLBtn, gbc_imgURLBtn);
 
-		voiceURLBtn = new JButton("Voice");
+		voiceURLBtn = new JButton("File âm thanh");
 		voiceURLBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				voiceFile = FileChooserUtil.chooseFile(CrudForm.this, "mp3");

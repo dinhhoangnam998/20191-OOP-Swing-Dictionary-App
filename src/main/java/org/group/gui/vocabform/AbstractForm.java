@@ -40,7 +40,7 @@ public class AbstractForm extends JPanel {
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
-		JLabel lblEnglish = new JLabel("English");
+		JLabel lblEnglish = new JLabel("English word");
 		GridBagConstraints gbc_lblEnglish = new GridBagConstraints();
 		gbc_lblEnglish.anchor = GridBagConstraints.WEST;
 		gbc_lblEnglish.insets = new Insets(0, 0, 5, 5);
@@ -49,7 +49,7 @@ public class AbstractForm extends JPanel {
 		add(lblEnglish, gbc_lblEnglish);
 
 		englishTF = new JTextField();
-		englishTF.setText("abc");
+		englishTF.setText("hello");
 		GridBagConstraints gbc_englishTF = new GridBagConstraints();
 		gbc_englishTF.insets = new Insets(0, 0, 5, 0);
 		gbc_englishTF.fill = GridBagConstraints.HORIZONTAL;
@@ -67,7 +67,7 @@ public class AbstractForm extends JPanel {
 		add(lblHashtag, gbc_lblHashtag);
 
 		hashtagTF = new JTextField();
-		hashtagTF.setText("#lala");
+		hashtagTF.setText("#test");
 		GridBagConstraints gbc_hastagTF = new GridBagConstraints();
 		gbc_hastagTF.insets = new Insets(0, 0, 5, 0);
 		gbc_hastagTF.fill = GridBagConstraints.HORIZONTAL;
@@ -76,7 +76,7 @@ public class AbstractForm extends JPanel {
 		add(hashtagTF, gbc_hastagTF);
 		hashtagTF.setColumns(10);
 
-		JLabel lblTuLoai = new JLabel("Tu loai");
+		JLabel lblTuLoai = new JLabel("Từ loại");
 		GridBagConstraints gbc_lblTuLoai = new GridBagConstraints();
 		gbc_lblTuLoai.anchor = GridBagConstraints.WEST;
 		gbc_lblTuLoai.insets = new Insets(0, 0, 5, 5);
@@ -123,7 +123,7 @@ public class AbstractForm extends JPanel {
 		rdbtnOther.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel.add(rdbtnOther);
 
-		JLabel lblPhienAm = new JLabel("Phien am");
+		JLabel lblPhienAm = new JLabel("Phiên âm");
 		GridBagConstraints gbc_lblPhienAm = new GridBagConstraints();
 		gbc_lblPhienAm.anchor = GridBagConstraints.WEST;
 		gbc_lblPhienAm.insets = new Insets(0, 0, 5, 5);
@@ -141,7 +141,7 @@ public class AbstractForm extends JPanel {
 		add(phienAmTF, gbc_phienAmTF);
 		phienAmTF.setColumns(10);
 
-		JLabel lblVietnamese = new JLabel("Vietnamese");
+		JLabel lblVietnamese = new JLabel("Nghĩa Tiếng Việt");
 		GridBagConstraints gbc_lblVietnamese = new GridBagConstraints();
 		gbc_lblVietnamese.anchor = GridBagConstraints.WEST;
 		gbc_lblVietnamese.insets = new Insets(0, 0, 5, 5);
@@ -158,9 +158,10 @@ public class AbstractForm extends JPanel {
 		add(scrollPane, gbc_scrollPane);
 
 		vietNamTA = new JTextArea();
+		vietNamTA.setText("This text is for test");
 		scrollPane.setViewportView(vietNamTA);
 
-		JLabel lblGoiNho = new JLabel("Goi nho");
+		JLabel lblGoiNho = new JLabel("Gợi nhớ");
 		GridBagConstraints gbc_lblGoiNho = new GridBagConstraints();
 		gbc_lblGoiNho.anchor = GridBagConstraints.WEST;
 		gbc_lblGoiNho.insets = new Insets(0, 0, 0, 5);
@@ -176,6 +177,7 @@ public class AbstractForm extends JPanel {
 		add(scrollPane_1, gbc_scrollPane_1);
 
 		goiNhoTA = new JTextArea();
+		goiNhoTA.setText("This text to test tooo");
 		scrollPane_1.setViewportView(goiNhoTA);
 
 	}

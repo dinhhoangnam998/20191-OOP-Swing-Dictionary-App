@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -14,7 +16,9 @@ import javax.swing.JPanel;
 
 import org.group.gui.event.listener.AddVocabListener;
 import org.group.gui.event.object.AddVocabEvent;
+import org.group.gui.share.Preview;
 import org.group.model.Vocabulary;
+import org.group.utils.audio.PlayMp3;
 
 public class AddForm extends CrudForm {
 
@@ -42,15 +46,16 @@ public class AddForm extends CrudForm {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Vocabulary v = collectInfo();
-				JDialog dialog = new JDialog();
 				Preview preview = new Preview();
 				preview.setData(v);
+				JDialog dialog = new JDialog();
 				dialog.add(preview, BorderLayout.CENTER);
 				dialog.setSize(new Dimension(540, 700));
 				dialog.setLocationRelativeTo(AddForm.this);
 				dialog.setVisible(true);
 			}
 		});
+
 		GridBagConstraints gbc_button = new GridBagConstraints();
 		gbc_button.fill = GridBagConstraints.HORIZONTAL;
 		gbc_button.anchor = GridBagConstraints.NORTH;
