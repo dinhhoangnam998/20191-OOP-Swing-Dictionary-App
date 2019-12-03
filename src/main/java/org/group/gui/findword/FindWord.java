@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import org.group.gui.event.listener.SearchByHashtagListener;
@@ -56,7 +57,7 @@ public class FindWord extends JPanel {
 		btnGroup.add(rdbtnWord);
 
 		wordTF = new JTextField();
-		
+
 		wordTF.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String keyword = wordTF.getText();
